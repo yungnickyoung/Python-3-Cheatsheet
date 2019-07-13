@@ -1,4 +1,8 @@
 ## Table of Contents
+- [Dictionaries](#dictionaries)
+  - [Iteration](#dictionary-iteration)
+  - [Sorting](#dictionary-sorting)
+
 - [Lists](#lists)
   - [Comprehensions](#list-comprehensions)
   - [Initialization](#list-initialization)
@@ -15,6 +19,37 @@
 - [Common Gotchas](#common-gotchas)
   - [Nested List Initialization](#nested-list-initialization)
   - [Mutable Default Arguments](#mutable-default-arguments)
+
+## Dictionaries
+### Dictionary Iteration
+Get w/ default value if key not in dict:
+```python
+my_dict[k] = my_dict.get(k, 0) + 1; # get retrieves value for k, or 0 if k not in dict
+```
+
+Iterating a dict iterates only the keys:
+```python
+for k in my_dict:  # k will be each key, not each key-value pair
+    ...
+```
+
+Testing membership: `if k in dict: ...`
+
+To get actual key-value pairs at the same time:
+```python
+for k,v in my_dict.iteritems():
+    ...
+```
+applies to comprehensions as well: `new_d = {k: v+1 for k,v in d.iteritems()}`
+
+### Dictionary Sorting
+It is not possible to sort a dictionary, only to get a representation of a dictionary that is sorted. Dictionaries are inherently orderless, but other types, such as lists and tuples, are not. So you need an ordered data type to represent sorted values, which will be a list—probably a list of tuples.  
+- `sorted(d.iteritems())`
+  - sorted list of key-value pairs by key
+  - by value: `sorted(d.iteritems(), key=lambda x: x[1]`
+- `sorted(d)`
+  - sorted list of keys only
+  - sorted list of keys by value: `sorted(d, key=lambda x: d[x])`
 
 ## Lists
 ### List Comprehensions
