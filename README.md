@@ -4,6 +4,13 @@
   - [Initialization](#list-initialization)
   - [Reversal](#list-reversal)
   - [Sorting](#list-sorting)
+- [Strings](#strings)
+  - [From List](#from-list)
+  - [Python String Constants](#string-constants)
+  - [`isalnum()`](#isalnum)
+  - [`strip()`](#strip)
+  - [`str()` vs `repr`](#str-vs-repr)
+
   
 - [Common Gotchas](#common-gotchas)
   - [Nested List Initialization](#nested-list-initialization)
@@ -58,6 +65,12 @@ my_list = [[None] * n] * n
 ```
 The latter method makes copies of the **reference** to the original list, thus any modification to one row will change the other rows in the same way. The first method does not do this.
 
+A list can be created from a string using `list(my_str)`
+We can apply a filter as well:
+```python
+my_list = list(c for c in my_str if c not in ('a', 'c', 'e'))
+```
+
 ### List Reversal
  - `my_list[::-1]`
    - returns copy of list in reverse
@@ -91,6 +104,40 @@ The latter method makes copies of the **reference** to the original list, thus a
  ```python
  list2 = sorted(list1, key=lambda x: x[1], reverse=True)
  ```
+ 
+## Strings
+### From List
+```python
+my_list = ['te', 's', 't', '1', '2', '3', '_']
+s = ''.join(my_list) # "test123_"
+s2 = ''.join(c for c in my_list if c.isalnum()) # "test123"
+```
+
+### String Constants
+Python has a lot of useful string constants. A few of them are shown below.
+For a complete list, see the [documentation](https://docs.python.org/3.7/library/string.html)
+ - `string.ascii_letters`
+ - `string.digits`
+ - `string.whitespace`
+ 
+ e.g. `if d in string.digits: ...`
+ 
+### `isalnum()`
+Returns `True` if a string consists only of alphanumeric characters.
+```python
+s = "test123"
+s.isalnum() # True
+```
+
+### `strip()`
+Returns copy of string without surrounding whitespace, if any.
+```python
+s = "   test "
+s.strip() # returns "test"
+```
+
+### `str()` vs `repr()`
+See [this GeeksForGeeks article](https://www.geeksforgeeks.org/str-vs-repr-in-python/) for more info.
 
 ## Common Gotchas
 ### Nested List Initialization
