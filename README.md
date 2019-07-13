@@ -10,8 +10,8 @@
   - [`isalnum()`](#isalnum)
   - [`strip()`](#strip)
   - [`str()` vs `repr`](#str-vs-repr)
-
-  
+- [`any()`](#any)
+- [`all()`](#all)
 - [Common Gotchas](#common-gotchas)
   - [Nested List Initialization](#nested-list-initialization)
   - [Mutable Default Arguments](#mutable-default-arguments)
@@ -138,6 +138,56 @@ s.strip() # returns "test"
 
 ### `str()` vs `repr()`
 See [this GeeksForGeeks article](https://www.geeksforgeeks.org/str-vs-repr-in-python/) for more info.
+
+## `any()`
+Usage:
+```python
+any(iterable)
+```
+`any()` takes any iterable as an argument and returns `True` if at least one element of the iterable is `True`.
+
+```python
+any([1, 3, 4, 0])   # True
+any([0, False])     # False
+any([0, False, 5])  # True
+any([])             # False
+
+any("This is good") # True
+any("0")            # True
+any("")             # False
+```
+
+See [here](https://www.programiz.com/python-programming/methods/built-in/any) for more info.
+
+Check if any tuples contain a negative value:
+```python
+if any(x < 0 or y < 0 for (x, y) in list_ranges): ...
+```
+
+## `all()`
+```python
+all(iterable)
+```
+`all()` takes any iterable as an argument and returns `True` if all the elements of the iterable are `True`.
+
+```python
+all([1, 3, 4, 5])  # True
+all([0, False])    # False
+all([1, 3, 4, 0])  # False
+all([0, False, 5]) # False
+all([])            # True
+
+all("This is good") # True
+all("0")            # True
+all("")             # True
+```
+
+See [here](https://www.programiz.com/python-programming/methods/built-in/all) for more info.
+
+Check if all elements of a list are `x`: 
+```python
+if all(c == x for c in alst): ...
+```
 
 ## Common Gotchas
 ### Nested List Initialization
