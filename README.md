@@ -37,7 +37,7 @@ Testing membership: `if k in dict: ...`
 
 To get actual key-value pairs at the same time:
 ```python
-for k,v in my_dict.iteritems():
+for k,v in my_dict.items():
     ...
 ```
 applies to comprehensions as well: `new_d = {k: v+1 for k,v in d.iteritems()}`
