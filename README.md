@@ -15,6 +15,7 @@
   - [`isalnum()`](#isalnum)
   - [`strip()`](#strip)
   - [`str()` vs `repr`](#str-vs-repr)
+- [Functional Iteration](#functional-iteration)
 - [`any()`](#any)
 - [`all()`](#all)
 - [Common Gotchas](#common-gotchas)
@@ -174,6 +175,53 @@ s.strip() # returns "test"
 
 ### `str()` vs `repr()`
 See [this GeeksForGeeks article](https://www.geeksforgeeks.org/str-vs-repr-in-python/) for more info.
+
+## Functional Iteration
+For some good explanations and examples for the following functions, see [here](http://book.pythontips.com/en/latest/map_filter.html).
+
+Note that `map()` and `filter()` both return iterators, so if you want a list, you need to use `list()` on the output. However, this is typically better accomplished with list comprehensions or `for` loops for the sake of readability.
+  
+### `map()`
+`map()` applies a function to all the items in a list.
+```python
+map(function_to_apply, list_of_inputs)
+```
+  
+For example, the following code:
+```python
+items = [1, 2, 3, 4, 5]
+squared = []
+for i in items:
+    squared.append(i**2)
+```
+can be accomplished more easily with `map()`:
+```python3
+items = [1, 2, 3, 4, 5]
+squared = list(map(lambda x: x**2, items))
+```
+
+### `filter()`
+`filter()` creates a list of elements for which a function returns `True`.
+  
+Here's an example:
+```python3
+number_list = range(-5, 5)
+less_than_zero = list(filter(lambda x: x < 0, number_list))
+print(less_than_zero) # [-5, -4, -3, -2, -1]
+```
+
+### `reduce()`
+`reduce()` is used to perform a rolling computation on a list.
+
+Here's an example:
+```python3
+from functools import reduce
+number_list = [1, 2, 3, 4]
+product = reduce((lambda x, y: x * y), number_list) # output: 24
+```
+
+Often times, an explicit `for` loop is more readable than using `reduce()`.
+But if you're trying to flex in an interview, and the problem calls for it, it could be a nice way to subtly show your understanding of functional programming.
 
 ## `any()`
 Usage:
