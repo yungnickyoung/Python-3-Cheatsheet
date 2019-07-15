@@ -3,7 +3,6 @@
 - [Dictionaries](#dictionaries)
   - [Iteration](#dictionary-iteration)
   - [Sorting](#dictionary-sorting)
-
 - [Lists](#lists)
   - [Comprehensions](#list-comprehensions)
   - [Initialization](#list-initialization)
