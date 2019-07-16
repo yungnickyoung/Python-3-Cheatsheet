@@ -30,6 +30,8 @@
   - [`max()`](#max)
   - [`min()`](#min)
   - [`ord()`](#ord)
+  - [`pow()`](#pow)
+  - [`type()`](#type) 
 - [Common Gotchas](#common-gotchas)
   - [Nested List Initialization](#nested-list-initialization)
   - [Mutable Default Arguments](#mutable-default-arguments)
@@ -361,6 +363,31 @@ Given a string representing one Unicode character, return an integer representin
 For example, `ord('a')` returns the integer 97. `ord('€')` (Euro sign) return 8364. 
 
 This is the inverse of [`chr()`](#chr).
+
+### `pow()`
+Usage:
+```python3
+pow(x, y[, z])
+```
+Return `x` to the power `y`; if `z` is present, return `x` to the power `y`, modulo `z` (computed more efficiently than `pow(x, y) % z`).  
+`pow(x, y)` is equivalent to `x**y`.
+
+### `type()`
+Usage:
+```python3
+type(object)
+type(name, bases, dict)
+```
+
+With one argument, return the type of `object`. The return value is a type object and generally the same object as returned by `object.__class__`.
+
+E.g.
+```python3
+x = 5
+type(x)  # class 'int'
+```
+
+The [`isinstance()`](#isinstance) function is recommended for testing the type of an object, since it accounts for subclasses.
 
 ## Common Gotchas
 ### Nested List Initialization
