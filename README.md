@@ -29,7 +29,7 @@
 - [Generators](#generators)
   - [Using `yield`](#using-yield)
   - [Generator Expressions](#generator-expressions)
-- [Other Useful Built-in Functions](#built-in-functions)
+- [Other Useful Built-in Functions](#other-useful-built-in-functions)
   - [`abs()`](#abs)
   - [`any()`](#any)
   - [`all()`](#all)
@@ -492,7 +492,7 @@ Generator expressions are kind of lazy, producing items only when asked for. For
 
 ```python3
 items = [1, 3, 6]
-item_squared = (item^2 for item in items)
+item_squared = (item**2 for item in items)
 print(next(item_squared)) # 1
 print(next(item_squared)) # 9
 print(next(item_squared)) # 36
@@ -505,7 +505,7 @@ sum(x**2 for x in items) # 46
 max(x**2 for x in items) # 36
 ```
 
-## Built-in Functions
+## Other Useful Built-in Functions
 For a complete list of built-ins in Python 3, see [the documentation](https://docs.python.org/3/library/functions.html).
 ### `abs()`
 Returns the absolute value of a number, either an integer or floating point number.
