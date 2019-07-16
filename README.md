@@ -329,8 +329,8 @@ input([prompt])
 
 Example: 
 ```python3
->>> s = input('--> ')  
---> Monty Python's Flying Circus
+>>> s = input('-> ')  
+-> Monty Python's Flying Circus
 >>> s  
 "Monty Python's Flying Circus"
 ```
