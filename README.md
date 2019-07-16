@@ -13,7 +13,7 @@
   - [Python String Constants](#string-constants)
   - [`isalnum()`](#isalnum)
   - [`strip()`](#strip)
-  - [`str()` vs `repr`](#str-vs-repr)
+  - [`str()` vs `repr()`](#str-vs-repr)
 - [Functional Iteration](#functional-iteration)
   - [`map()`](#map)
   - [`filter()`](#filter)
