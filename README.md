@@ -18,6 +18,10 @@
   - [`map()`](#map)
   - [`filter()`](#filter)
   - [`reduce()`](#reduce)
+- [Decorators](#decorators)
+  - [`@classmethod`](#classmethod)
+  - [`@staticmethod`](#staticmethod)
+  - [`@property`](#property)
 - [Other Useful Built-in Functions](#built-in-functions)
   - [`abs()`](#abs)
   - [`any()`](#any)
@@ -236,6 +240,106 @@ product = reduce((lambda x, y: x * y), number_list) # output: 24
 
 Often times, an explicit `for` loop is more readable than using `reduce()`.
 But if you're trying to flex in an interview, and the problem calls for it, it could be a nice way to subtly show your understanding of functional programming.
+
+## Decorators
+A decorator is a function returning another function, usually applied as a function transformation using the `@wrapper` syntax. This syntax is merely syntactic sugar.
+
+The following two function definitions are semantically equivalent:
+```python3
+def f(...):
+    ...
+f = staticmethod(f)
+
+@staticmethod
+def f(...):
+    ...
+```
+
+### @classmethod
+Transform a method into a class method. A class method receives the class as implicit first argument, just like how an instance method receives the instance. To declare a class method:
+```python3
+class C:
+    @classmethod
+    def f(cls, arg1, arg2, ...):
+        ...
+```
+
+A class method can be called either on the class (like `C.f()`) or on an instance (like `C().f()`). The instance is ignored except for its class. If a class method is called for a derived class, the derived class object is passed as the implied first argument.
+
+Note that class methods are not the same as C++ or Java static methods. If you want those, see [`@staticmethod`](#staticmethod).
+
+### @staticmethod
+Transform a method into a static method. A static method does not receive an implicit first argument. To declare a static method:
+```python3
+class C:
+    @staticmethod
+    def f(arg1, arg2, ...):
+        ...
+```
+
+A static method can be called either on the class (like `C.f()`) or on an instance (like `C().f()`). Static methods in Python are similar to those found in Java or C++.
+
+### @property
+Return a property attribute.
+Usage:
+```python3
+property(fget=None, fset=None, fdel=None, doc=None)
+```
+`fget` is a function for getting an attribute value. `fset` is a function for setting an attribute value. `fdel` is a function for deleting an attribute value. `doc` creates a docstring for the attribute.
+
+The following is a typical use case for defining a managed attribute `x`:
+```python3
+class C:
+    def __init__(self):
+        self._x = None
+
+    def getx(self):
+        return self._x
+
+    def setx(self, value):
+        self._x = value
+
+    def delx(self):
+        del self._x
+
+    x = property(getx, setx, delx, "I'm the 'x' property.")
+```
+Or, equivalently:
+```python3
+class C:
+    def __init__(self):
+        self._x = None
+
+    @property
+    def x(self):
+        """I'm the 'x' property."""
+        return self._x
+
+    @x.setter
+    def x(self, value):
+        self._x = value
+
+    @x.deleter
+    def x(self):
+        del self._x
+```    
+
+If `c` is an instance of `C`, then `c.x` will invoke the getter; `c.x = value` will invoke the setter; and `del c.x` the deleter.
+
+If `doc` is not provided, the property will copy `fget`'s docstring, if it exists. Thus, it is straightforward to create read-only properties with the `@property` decorator:
+```python3
+class Parrot:
+    def __init__(self):
+        self._voltage = 100000
+
+    @property
+    def voltage(self):
+        """Get the current voltage."""
+        return self._voltage
+```
+The `@property` decorator turns the `voltage()` method into a “getter” for a read-only attribute with the same name, and it sets the docstring for `voltage` to “Get the current voltage.”
+
+For more information, check out [the documentation](https://docs.python.org/3/library/functions.html#property) and [this Programiz article](https://www.programiz.com/python-programming/property).
 
 ## Built-in Functions
 For a complete list of built-ins in Python 3, see [the documentation](https://docs.python.org/3/library/functions.html).
