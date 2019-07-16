@@ -18,8 +18,9 @@
   - [`map()`](#map)
   - [`filter()`](#filter)
   - [`reduce()`](#reduce)
-- [`any()`](#any)
-- [`all()`](#all)
+- [Built-in Functions](#built-in-functions)
+  - [`any()`](#any)
+  - [`all()`](#all)
 - [Common Gotchas](#common-gotchas)
   - [Nested List Initialization](#nested-list-initialization)
   - [Mutable Default Arguments](#mutable-default-arguments)
@@ -225,7 +226,8 @@ product = reduce((lambda x, y: x * y), number_list) # output: 24
 Often times, an explicit `for` loop is more readable than using `reduce()`.
 But if you're trying to flex in an interview, and the problem calls for it, it could be a nice way to subtly show your understanding of functional programming.
 
-## `any()`
+## Built-in Functions
+### `any()`
 Usage:
 ```python
 any(iterable)
@@ -250,7 +252,7 @@ Check if any tuples contain a negative value:
 if any(x < 0 or y < 0 for (x, y) in list_ranges): ...
 ```
 
-## `all()`
+### `all()`
 ```python
 all(iterable)
 ```
