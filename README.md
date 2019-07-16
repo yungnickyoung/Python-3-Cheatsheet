@@ -14,6 +14,10 @@
   - [`isalnum()`](#isalnum)
   - [`strip()`](#strip)
   - [`str()` vs `repr()`](#str-vs-repr)
+- [Iterators](#iterators)
+  - [Iterator vs Iterable](#iterator-vs-iterable)
+  - [How for loop actually works](#how-for-loop-actually-works)
+  - [Creating an Iterator](#creating-an-iterator)
 - [Functional Iteration](#functional-iteration)
   - [`map()`](#map)
   - [`filter()`](#filter)
@@ -22,6 +26,7 @@
   - [`@classmethod`](#classmethod)
   - [`@staticmethod`](#staticmethod)
   - [`@property`](#property)
+- [Generators](#generators)
 - [Other Useful Built-in Functions](#built-in-functions)
   - [`abs()`](#abs)
   - [`any()`](#any)
@@ -194,6 +199,96 @@ s.strip() # returns "test"
 ### `str()` vs `repr()`
 See [this GeeksForGeeks article](https://www.geeksforgeeks.org/str-vs-repr-in-python/) for more info.
 
+# Iterators
+In Python, an iterator is an object with a countable number of values that can be iterated upon.
+An iterator is an object which implements the iterator protocol, consisting of `__iter__()` and `__next__()`.  
+The `__iter__()` method returns an iterator on the object, and the `__next__()` method gets the next item using the iterator, or raises a `StopIteration` exception if the end of the iterable is reached.
+
+### Iterator vs Iterable
+Lists, tuples, dictionaries, and sets are all iterable objects. They are iterable *containers* which you can get an iterator from.
+All these objects have a `__iter__()` method which is used to get an iterator:
+```python3
+mytuple = ("apple", "banana", "cherry")
+myit = iter(mytuple)
+
+print(next(myit)) # apple
+print(next(myit)) # banana
+print(next(myit)) # cherry
+print(next(myit)) # raises StopIteration exception
+```
+Note -- `next(obj)` is the same as `obj.__next__()`.
+
+
+### How for loop actually works
+The `for` loop can iterate any iterable.  
+The `for` loop in Python is actually implemented like so:
+```python3
+iter_obj = iter(iterable) # create iterator object from iterable
+
+# infinite loop
+while True:
+    try:
+        element = next(iter_obj) # get the next item
+        # do something with element
+    except StopIteration:
+        break
+```
+So, internally, the `for` loop creates an iterator object by calling `iter()` on the iterable, and then repeatedly calling `next()` until a `StopIteration` exception is raised.
+
+### Creating an Iterator
+Here is an example of an iterator that will give us the next power of two in each iteration.
+```python3
+class PowTwo:
+    """Class to implement an iterator of powers of two"""
+
+    def __init__(self, max = 0):
+        self.max = max
+
+    def __iter__(self):
+        self.n = 0
+        return self
+
+    def __next__(self):
+        if self.n <= self.max:
+            result = 2 ** self.n
+            self.n += 1
+            return result
+        else:
+            raise StopIteration
+```
+
+Now we can use it as follows:
+```python3
+>>> a = PowTwo(4)
+>>> i = iter(a)
+>>> next(i)
+1
+>>> next(i)
+2
+>>> next(i)
+4
+>>> next(i)
+8
+>>> next(i)
+16
+>>> next(i)
+Traceback (most recent call last):
+...
+StopIteration
+```
+Or, alternatively, using a `for` loop:
+```python3
+>>> for i in PowTwo(5):
+...     print(i)
+...     
+1
+2
+4
+8
+16
+32
+```
+
 ## Functional Iteration
 For some good explanations and examples for the following functions, see [here](http://book.pythontips.com/en/latest/map_filter.html).
 
@@ -340,6 +435,9 @@ class Parrot:
 The `@property` decorator turns the `voltage()` method into a “getter” for a read-only attribute with the same name, and it sets the docstring for `voltage` to “Get the current voltage.”
 
 For more information, check out [the documentation](https://docs.python.org/3/library/functions.html#property) and [this Programiz article](https://www.programiz.com/python-programming/property).
+
+## Generators
+TODO
 
 ## Built-in Functions
 For a complete list of built-ins in Python 3, see [the documentation](https://docs.python.org/3/library/functions.html).
