@@ -27,6 +27,8 @@
   - [`@staticmethod`](#staticmethod)
   - [`@property`](#property)
 - [Generators](#generators)
+  - [Using `yield`](#using-yield)
+  - [Generator Expressions](#generator-expressions)
 - [Other Useful Built-in Functions](#built-in-functions)
   - [`abs()`](#abs)
   - [`any()`](#any)
@@ -437,7 +439,71 @@ The `@property` decorator turns the `voltage()` method into a “getter” for a
 For more information, check out [the documentation](https://docs.python.org/3/library/functions.html#property) and [this Programiz article](https://www.programiz.com/python-programming/property).
 
 ## Generators
-TODO
+Generators are simpler ways of creating [iterators](#iterators). The overhead of creating `__iter__()`, `__next__()`, raising `StopIteration`, and keeping track of state can all be handled internally by a generator.
+
+A generator is a function that returns an object (iterator) which we can iterate over, one value at a time. 
+
+### Using `yield`
+To create a generator, simply define a function using a `yield` statement.
+
+A function containing at least one `yield` statement (it may contain other `yield` and `return` statements) becomes a generator.
+
+Both `yield` and `return` return some value from a function. The difference is that, while a `return` statement terminates a function entirely, `yield` pauses the function, saving its state and continuing from where it left off in successive calls.
+
+Once a function yields, it is paused and control is transferred back to the caller. Local variables and their states are remembered between successive calls. When the function terminates, `StopIteration` is raised automatically on further calls.
+
+Below is a simple generator example, for the sake of demonstrating how generators work.
+```python3
+def my_gen():
+    n = 1
+    print('This is printed first')
+    yield n
+
+    n += 1
+    print('This is printed second')
+    yield n
+    
+# Without for loop:
+a = my_gen()
+next(a) # 'This is printed first'
+next(a) # 'This is printed second'
+next(a) # Traceback ... StopIteration
+
+# With for loop:
+for item in my_gen():
+    print(item)
+````
+
+Below is a more typical example. Generators often use loops with a suitable terminating condition.
+```python3
+def reverse(my_str):
+    for i in range(len(my_str) - 1, -1, -1):
+        yield my_str[i]
+        
+for char in reverse("hello"):
+    print(char) # prints each char reverse on a new line
+```
+Note that the above example works not just with strings, but also other kinds of iterables.
+
+### Generator Expressions
+Generator expressions can be used to create an anonymous generator function. The syntax is similar to that of [list comprehensions](#list-comprehensions), but uses parentheses instead of square brackets. However, while a list comprehension produces the entire list, generator expressions produce one item at a time.
+
+Generator expressions are kind of lazy, producing items only when asked for. For this reason, using a generator expression is much more memory efficient than an equivalent list comprehension.
+
+```python3
+items = [1, 3, 6]
+item_squared = (item^2 for item in items)
+print(next(item_squared)) # 1
+print(next(item_squared)) # 9
+print(next(item_squared)) # 36
+next(item_squared) # StopIteration
+```
+
+Generator expressions can be used inside function calls. When used in such a way, the round parentheses can be dropped.
+```python3
+sum(x**2 for x in items) # 46
+max(x**2 for x in items) # 36
+```
 
 ## Built-in Functions
 For a complete list of built-ins in Python 3, see [the documentation](https://docs.python.org/3/library/functions.html).
