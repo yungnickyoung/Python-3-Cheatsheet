@@ -1,5 +1,13 @@
 # Python 3 Notes
 ## Table of Contents
+- [Built-in Types](#built-in-types)
+  - [Boolean Types](#boolean-types)
+  - [Numeric Types](#numeric-types)
+  - [Sequence Types](#sequence-types)
+    - [Mutable Sequences](#mutable-sequences)
+    - [Immutable Sequences](#immutable-sequences)
+  - [Set Types](#set-types)
+  - [Mapping Types](#mapping-types)
 - [Dictionaries](#dictionaries)
   - [Iteration](#dictionary-iteration)
   - [Sorting](#dictionary-sorting)
@@ -12,6 +20,7 @@
   - [From List](#from-list)
   - [Python String Constants](#string-constants)
   - [`isalnum()`](#isalnum)
+  - [`split()`](#split)
   - [`strip()`](#strip)
   - [`str()` vs `repr()`](#str-vs-repr)
 - [Iterators](#iterators)
@@ -46,6 +55,80 @@
 - [Common Gotchas](#common-gotchas)
   - [Nested List Initialization](#nested-list-initialization)
   - [Mutable Default Arguments](#mutable-default-arguments)
+
+## Built-in Types
+In this section I have included information on the more basic built-in types. For information on more specialized built-in types, check out the [Python documentation](https://docs.python.org/3/library/stdtypes.html)
+
+### Boolean Types
+```python3
+class 'bool'
+```
+
+By default, an object is considered `True` unless its class defines either a `__bool__()` method that returns `False` or a `__len__()` method that returns zero. Here are most of the built-in objects considered `False`:
+- constants defined to be false: `None` and `False`
+- zero of any numberic type: `0`, `0.0`, `0j`, `Decimal(0)`, `Fraction(0, 1)`
+- empty sequences and collections: `''`, `()`, `[]`, `{}`, `set()`, `range(0)`
+
+### Numeric Types
+```python3
+class 'int'
+class 'float'
+class 'complex'
+```
+
+Integers have unlimited precision. Floating point numbers are usually implemented using `double` in C, and are therefore system-dependent. Complex numbers have a real and imaginary part, which can be accessed using `z.real` and `z.imag`, respectively. Complex numbers include 'j' appended to a numeric literal.
+
+The standard libarary includes additional numeric types, [Fraction](https://docs.python.org/3/library/fractions.html#module-fractions)s which hold rationals, and [Decimal](https://docs.python.org/3/library/decimal.html#module-decimal)s which hold floating-point numbers with user-definable precision.
+
+### Sequence Types
+Immutable sequences have support for the `hash()` built-in, while mutable sequences do not. This means that immutable sequences can be used as `dict` keys or stored in `set` and `frozenset` instances, while mutable sequences cannot.
+
+#### Mutable Sequences
+```python3
+class 'list'
+class 'bytearray
+```
+
+`bytearray` objects are a mutable counterpart to `bytes` objects.
+
+#### Immutable Sequences
+```python3
+class 'tuple'
+class 'range'
+class 'str'
+class 'bytes'
+```
+
+`bytes` objects are sequences of single bytes. The syntax for `bytes` literals is largely the same as that for string literals, except that a `b` prefix is added:  
+- Single quotes: `b'still allows embedded "double" quotes'`
+- Double quotes: `b"still allows embedded 'single' quotes"`
+- Triple quotes: `b'''3 single quotes'''`, `b"""3 double quotes"""`
+
+Only ASCII chars are permitted in `bytes` literals.  
+`bytes` objects actually behave like immutable sequences of integers, with each value restricted to `0 <= x < 256`.
+
+`bytes` objects can be created in several ways:
+- A zero-filled bytes object of a specific length: `bytes(10)`
+- From an iterable of integers: `bytes(range(20))`
+- Copying existing binary data via the buffer protocol: `bytes(obj)`
+
+### Set Types
+```python3
+class 'set'
+class 'frozenset'
+```
+
+`set` is mutable, while `frozenset` is immutable.  
+Note that since `frozenset` is immutable, it must be entirely populated at the moment of construction. It cannot use the literal curly brace syntax that ordinary `set` uses, as that syntax is reserved for `set`.
+
+Instead, use `frozenset([iterable])`.
+
+### Mapping Types
+```python3
+class 'dict'
+```
+
+See the [Dictionaries](#dictionaries) section for more info.
 
 ## Dictionaries
 ### Dictionary Iteration
@@ -191,11 +274,19 @@ s = "test123"
 s.isalnum() # True
 ```
 
+### `split()`
+Return a list of the words in the string, using `sep` as the delimiter string. If `maxsplit` is given, at most `maxsplit` splits are done (thus, the list will have at most `maxsplit + 1` elements).
+```python3
+'1,2,3'.split(',')             # ['1', '2', '3']
+'1,2,3'.split(',', maxsplit=1) # ['1', '2,3']
+'1,2,,3,'.split(',')           # ['1', '2', '', '3', '']
+```
+
 ### `strip()`
 Returns copy of string without surrounding whitespace, if any.
 ```python
 s = "   test "
-s.strip() # returns "test"
+s.strip() # "test"
 ```
 
 ### `str()` vs `repr()`
