@@ -18,9 +18,18 @@
   - [`map()`](#map)
   - [`filter()`](#filter)
   - [`reduce()`](#reduce)
-- [Built-in Functions](#built-in-functions)
+- [Other Useful Built-in Functions](#built-in-functions)
+  - [`abs()`](#abs)
   - [`any()`](#any)
   - [`all()`](#all)
+  - [`chr()`](#chr)
+  - [`enumerate()`](#enumerate)
+  - [`input()`](#input)
+  - [`isinstance()`](#isinstance)
+  - [`len()`](#len)
+  - [`max()`](#max)
+  - [`min()`](#min)
+  - [`ord()`](#ord)
 - [Common Gotchas](#common-gotchas)
   - [Nested List Initialization](#nested-list-initialization)
   - [Mutable Default Arguments](#mutable-default-arguments)
@@ -227,6 +236,11 @@ Often times, an explicit `for` loop is more readable than using `reduce()`.
 But if you're trying to flex in an interview, and the problem calls for it, it could be a nice way to subtly show your understanding of functional programming.
 
 ## Built-in Functions
+For a complete list of built-ins in Python 3, see [the documentation](https://docs.python.org/3/library/functions.html).
+### `abs()`
+Returns the absolute value of a number, either an integer or floating point number.
+If the argument is a complex number, its magnitude is returned.
+
 ### `any()`
 Usage:
 ```python
@@ -276,6 +290,77 @@ Check if all elements of a list are `x`:
 ```python
 if all(c == x for c in alst): ...
 ```
+
+### `chr()`
+Returns the string representing a character whose Unicode code point is the integer passed.
+
+For example, `chr(97)` returns the string `a`, while `chr(8364)` returns the string `€`.
+
+This is the inverse of [`ord()`](#ord).
+
+### `enumerate()`
+Usage:
+```python3
+enumerate(iterable, start=0)
+```
+Returns an enumerate object. `iterable` must be a sequence, iterator, or some object which suports iteration. The `__next__()` method of the iterator returned by `enumerate()` returns a tuple containing a count (from `start` which defaults to zero) and the values obtained from iterating over the iterable.  
+
+Example:
+```python3
+seasons = ['Spring', 'Summer', 'Fall', 'Winter']
+list(enumerate(seasons))              # [(0, 'Spring'), (1, 'Summer'), (2, 'Fall'), (3, 'Winter')]
+list(enumerate(seasons, start=1))     # [(1, 'Spring'), (2, 'Summer'), (3, 'Fall'), (4, 'Winter')]
+```
+This is equivalent to:
+```python3
+def enumerate(sequence, start=0):
+    n = start
+    for elem in sequence:
+        yield n, elem
+        n += 1
+```
+
+### `input()`
+Gets input from the user.
+Usage:
+```python3
+input([prompt])
+```
+
+Example: 
+```python3
+>>> s = input('--> ')  
+--> Monty Python's Flying Circus
+>>> s  
+"Monty Python's Flying Circus"
+```
+If the `prompt` arg is present, it is written to stdout without a trailing newline.
+
+### `isinstance()`
+Usage:
+```python3
+isinstance(object, classinfo)
+```
+
+Returns true if the `object` argument is an instance of the `classinfo` argument, or of a (direct, indirect, or virtual) subclass thereof. Returns false otherwise.
+
+If `classinfo` is a tuple of type objects, return true if `object` is an instance of any of *any* of these types.
+
+### `len()`
+Return the length of an object. The argument may be a sequence (e.g. string, bytes, tuple, list, or range) or a collection (e.g. dictionary, set, frozen set).
+
+### `max()`
+Returns the max item in an iterable, or the max of multiple arguments passed.
+
+### `min()`
+Returns the min item in an iterable, or the min of multiple arguments passed.
+
+### `ord()`
+Given a string representing one Unicode character, return an integer representing the Unicode code point of that character.
+
+For example, `ord('a')` returns the integer 97. `ord('€')` (Euro sign) return 8364. 
+
+This is the inverse of [`chr()`](#chr).
 
 ## Common Gotchas
 ### Nested List Initialization
