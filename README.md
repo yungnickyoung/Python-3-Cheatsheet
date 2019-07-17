@@ -66,7 +66,7 @@ class 'bool'
 
 By default, an object is considered `True` unless its class defines either a `__bool__()` method that returns `False` or a `__len__()` method that returns zero. Here are most of the built-in objects considered `False`:
 - constants defined to be false: `None` and `False`
-- zero of any numberic type: `0`, `0.0`, `0j`, `Decimal(0)`, `Fraction(0, 1)`
+- zero of any numeric type: `0`, `0.0`, `0j`, `Decimal(0)`, `Fraction(0, 1)`
 - empty sequences and collections: `''`, `()`, `[]`, `{}`, `set()`, `range(0)`
 
 ### Numeric Types
@@ -76,7 +76,7 @@ class 'float'
 class 'complex'
 ```
 
-Integers have unlimited precision. Floating point numbers are usually implemented using `double` in C, and are therefore system-dependent. Complex numbers have a real and imaginary part, which can be accessed using `z.real` and `z.imag`, respectively. Complex numbers include 'j' appended to a numeric literal.
+Integers have unlimited precision. Floating point numbers are usually implemented using `double` in C, and are therefore system-dependent. Complex numbers have a real and imaginary part, which can be accessed using `z.real` and `z.imag`, respectively. Complex numbers must include `j` appended to a numeric literal (`0j` is acceptable for when you want a `complex` value with no imaginary part).
 
 The standard libarary includes additional numeric types, [Fraction](https://docs.python.org/3/library/fractions.html#module-fractions)s which hold rationals, and [Decimal](https://docs.python.org/3/library/decimal.html#module-decimal)s which hold floating-point numbers with user-definable precision.
 
