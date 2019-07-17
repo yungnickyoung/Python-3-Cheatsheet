@@ -150,13 +150,13 @@ To get actual key-value pairs at the same time:
 for k,v in my_dict.items():
     ...
 ```
-applies to comprehensions as well: `new_d = {k: v+1 for k,v in d.iteritems()}`
+applies to comprehensions as well: `new_d = {k: v+1 for k,v in d.items()}`
 
 ### Dictionary Sorting
 It is not possible to sort a dictionary, only to get a representation of a dictionary that is sorted. Dictionaries are inherently orderless, but other types, such as lists and tuples, are not. So you need an ordered data type to represent sorted values, which will be a list—probably a list of tuples.  
-- `sorted(d.iteritems())`
+- `sorted(d.items())`
   - sorted list of key-value pairs by key
-  - by value: `sorted(d.iteritems(), key=lambda x: x[1]`
+  - by value: `sorted(d.items(), key=lambda x: x[1]`
 - `sorted(d)`
   - sorted list of keys only
   - sorted list of keys by value: `sorted(d, key=lambda x: d[x])`
