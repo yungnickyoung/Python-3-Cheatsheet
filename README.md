@@ -1,4 +1,3 @@
-# Python 3 Notes
 ## Table of Contents
 - [Built-in Types](#built-in-types)
   - [Boolean Types](#boolean-types)
@@ -56,6 +55,7 @@
   - [Nested List Initialization](#nested-list-initialization)
   - [Mutable Default Arguments](#mutable-default-arguments)
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Built-in Types
 In this section I have included information on the more basic built-in types. For information on more specialized built-in types, check out the [Python documentation](https://docs.python.org/3/library/stdtypes.html)
 
@@ -130,6 +130,7 @@ class 'dict'
 
 See the [Dictionaries](#dictionaries) section for more info.
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Dictionaries
 ### Dictionary Iteration
 Get w/ default value if key not in dict:
@@ -161,6 +162,7 @@ It is not possible to sort a dictionary, only to get a representation of a dicti
   - sorted list of keys only
   - sorted list of keys by value: `sorted(d, key=lambda x: d[x])`
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Lists
 ### List Comprehensions
 General Syntax:
@@ -249,7 +251,8 @@ my_list = list(c for c in my_str if c not in ('a', 'c', 'e'))
  ```python
  list2 = sorted(list1, key=lambda x: x[1], reverse=True)
  ```
- 
+
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Strings
 ### From List
 ```python
@@ -297,7 +300,8 @@ s.strip() # "test"
 ### `str()` vs `repr()`
 See [this GeeksForGeeks article](https://www.geeksforgeeks.org/str-vs-repr-in-python/) for more info.
 
-# Iterators
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
+## Iterators
 In Python, an iterator is an object with a countable number of values that can be iterated upon.
 An iterator is an object which implements the iterator protocol, consisting of `__iter__()` and `__next__()`.  
 The `__iter__()` method returns an iterator on the object, and the `__next__()` method gets the next item using the iterator, or raises a `StopIteration` exception if the end of the iterable is reached.
@@ -387,6 +391,7 @@ Or, alternatively, using a `for` loop:
 32
 ```
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Functional Iteration
 For some good explanations and examples for the following functions, see [here](http://book.pythontips.com/en/latest/map_filter.html).
 
@@ -434,6 +439,7 @@ product = reduce((lambda x, y: x * y), number_list) # output: 24
 Often times, an explicit `for` loop is more readable than using `reduce()`.
 But if you're trying to flex in an interview, and the problem calls for it, it could be a nice way to subtly show your understanding of functional programming.
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Decorators
 A decorator is a function returning another function, usually applied as a function transformation using the `@wrapper` syntax. This syntax is merely syntactic sugar.
 
@@ -534,6 +540,7 @@ The `@property` decorator turns the `voltage()` method into a “getter” for a
 
 For more information, check out [the documentation](https://docs.python.org/3/library/functions.html#property) and [this Programiz article](https://www.programiz.com/python-programming/property).
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Generators
 Generators are simpler ways of creating [iterators](#iterators). The overhead of creating `__iter__()`, `__next__()`, raising `StopIteration`, and keeping track of state can all be handled internally by a generator.
 
@@ -601,6 +608,7 @@ sum(x**2 for x in items) # 46
 max(x**2 for x in items) # 36
 ```
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Other Useful Built-in Functions
 For a complete list of built-ins in Python 3, see [the documentation](https://docs.python.org/3/library/functions.html).
 ### `abs()`
@@ -753,6 +761,7 @@ type(x)  # class 'int'
 
 The [`isinstance()`](#isinstance) function is recommended for testing the type of an object, since it accounts for subclasses.
 
+<sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Common Gotchas
 ### Nested List Initialization
 When creating a list of lists, be sure to use the following structure:
