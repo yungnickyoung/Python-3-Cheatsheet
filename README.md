@@ -441,7 +441,7 @@ But if you're trying to flex in an interview, and the problem calls for it, it c
 
 <sup><sub>[▲ TOP](#table-of-contents)</sub></sup>
 ## Decorators
-A decorator is a function returning another function, usually applied as a function transformation using the `@wrapper` syntax. This syntax is merely syntactic sugar.
+A [decorator](https://www.scaler.com/topics/python/python-decorators/) is a function returning another function, usually applied as a function transformation using the `@wrapper` syntax. This syntax is merely syntactic sugar.
 
 The following two function definitions are semantically equivalent:
 ```python3
